@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springbootstudy.app.mapper.MemoMapper" >
+	
+	<insert id="addMemo" parameterType="Memo" useGeneratedKeys="true"  keyProperty="no">
+		INSERT INTO memo(title, content, writer, reg_date)
+		VALUES (#{title}, #{content}, #{writer}, NOW())
+	</insert>
+	
+	<update id="updateMemo" parameterType="Memo">
+		UPDATE memo
+		SET title=#{title}, content=#{content}, writer=#{writer}, reg_date=NOW() WHERE no=#{no}
+	</update>
+	
+	<delete id="deleteMemo">
+		DELETE FROM memo WHERE no=#{no}
+	</delete>
+	
+	<select id="findAll" resultType="Memo">
+		SELECT * FROM memo
+	</select>
+	
+	<select id="findByNo" resultType="Memo">
+		SELECT * FROM memo WHERE no = #{no}
+	</select>
+
+</mapper>	
+
+
+
