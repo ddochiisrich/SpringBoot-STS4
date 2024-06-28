@@ -3,8 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link th:href="@{bootstrap/bootstrap.min.css}" th:attr="rel='stylesheet'">
 </head>
 <body>
-
+	<div class="container">
+		<h1 th:text="#{thymeleaf3.title}" class="fw-bold"></h1>
+		<hr>
+		<div th:if="${score >= 60}">if - 점수 : [[${score}]] - 합격 </div>
+		<div th:unless="${score lt 60}">unless - 점수 : [[${score}]] - 합격</div>
+		<div th:unless="${score ge 60}">unless - 점수 : [[${score}]] - 불합격</div>
+	
+		<hr>
+		
+		<div th:switch="${s}" th:with="s = ${score} / 10">
+			<span th:case="9">점수 : 90점대</span>
+			<span th:case="8">점수 : 80점대</span>
+			<span th:case="7">점수 : 70점대</span>
+			<span th:case="6">점수 : 60점대</span>
+			<span th:case="*">낙제</span>
+		</div>
+		<hr>
+		<!-- /* 삼 항 연산자 */ -->
+		<div th:text="${memo} != null ? '삼 항 연산자 - 메모 있음' : '삼 항 연산자 - 메모 없음'"></div>
+		<div th:text="${memo} ? '삼 항 연산자 - 메모 있음' : '삼 항 연산자 - 메모 없음'"></div>
+		<hr>
+		<!-- /* Elvis 연산자 지정한 값이 true 면 그 값을 출력 false 일 때 뒤에 지정한 값을 출력 */ -->
+		<div th:text="${memo} != null ?: 'Elvis 연산자 - 메모 없음'"></div>
+		<div th:text="${memo} ?: 'Elvis 연산자 - 메모 없음'"></div>
+		<hr>
+		<div th:text="${memo} != null ?: _">No-Operation-메모 없음</div>
+		<div th:text="${memo} ?: _">No-Operation-메모 없음</div>
+		<br>
+		<a th:href="@{thymeleaf1}">처음으로</a>
+		<a th:href="@{thymeleaf2/{no}(no=${param.no})}">이전으로</a>
+	</div>
 </body>
 </html>

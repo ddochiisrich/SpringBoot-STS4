@@ -45,7 +45,7 @@ public class MemoViewController {
 	@GetMapping("/thymeleaf3")
 	public String thDefault03(Model model, @RequestParam("no")int no) {
 		
-		model.addAttribute("memo", entityService.getMemo(no));
+		model.addAttribute("memo1", entityService.getMemo(no));
 		model.addAttribute("score", 70);
 		
 		return "th/default3";
