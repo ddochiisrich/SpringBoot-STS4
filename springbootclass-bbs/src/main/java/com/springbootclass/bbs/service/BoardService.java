@@ -10,11 +10,22 @@ import com.springbootclass.bbs.domain.Board;
 import com.springbootclass.bbs.domain.BoardDTO;
 import com.springbootclass.bbs.repository.BoardRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class BoardService {
 
 	@Autowired
 	private BoardRepository boardRepository;
+	
+	@Transactional
+	public BoardDTO updateBoard(BoardDTO dto) {
+		Board board = boardRepository.findById(dto.getNo()).get();
+		
+		board.updateBoard(dto);
+		
+		return new BoardDTO(board);
+	}
 	
 	public BoardDTO addBoard(BoardDTO dto) {
 		Board board = boardRepository.save(BoardDTO.toEntity(dto));

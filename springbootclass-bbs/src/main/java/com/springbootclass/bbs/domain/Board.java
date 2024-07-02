@@ -55,4 +55,12 @@ public class Board {
 	private String pass;
 	
 	private String file1;
+	
+	public void updateBoard(BoardDTO dto) {
+		this.title = dto.getTitle();
+		this.writer = dto.getWriter();
+		this.content = dto.getContent();
+	}
+	
+	
 }

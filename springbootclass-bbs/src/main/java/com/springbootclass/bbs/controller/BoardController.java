@@ -20,6 +20,21 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 
+	@PostMapping("/update")
+	public String updateBoard(BoardDTO dto, HttpServletResponse response, PrintWriter out) {
+		BoardDTO board = boardService.getBoard(dto.getNo());
+		if(! board.getPass().equals(dto.getPass())) {
+			response.setContentType("text/html; charset=utf-8");
+			out.println("<script>");
+			out.println(" alert('비밀번호가 맞지 않습니다.');");
+			out.println(" history.back();");
+			out.println("</script>");
+			return null;
+			}
+		boardService.updateBoard(dto);
+		return "redirect:boardList";
+	}
+	
 	@PostMapping("/updateForm")
 	public String updateBoard(Model model, HttpServletResponse response, PrintWriter out,@RequestParam("no") int no, @RequestParam("pass")String pass) {
 		BoardDTO dto = boardService.getBoard(no);
