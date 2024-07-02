@@ -20,6 +20,24 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 
+	@PostMapping("delete")
+	public String deleteBoard(HttpServletResponse response, PrintWriter out, @RequestParam("no") int no, @RequestParam("pass")String pass) {
+		
+		BoardDTO dto = boardService.getBoard(no);
+		
+		if(! dto.getPass().equals(pass)) {
+			response.setContentType("text/html; charset=utf-8");
+			out.println("<script>");
+			out.println(" alert('비밀번호가 맞지 않습니다.');");
+			out.println(" history.back();");
+			out.println("</script>");
+			return null;
+			}
+		
+		boardService.deleteBoard(no);
+		return "redirect:boardList";
+	}
+	
 	@PostMapping("/update")
 	public String updateBoard(BoardDTO dto, HttpServletResponse response, PrintWriter out) {
 		BoardDTO board = boardService.getBoard(dto.getNo());

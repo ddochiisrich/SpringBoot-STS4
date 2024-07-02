@@ -1,15 +1,18 @@
 package com.springbootclass.bbs.service;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.springbootclass.bbs.domain.Board;
 import com.springbootclass.bbs.domain.BoardDTO;
 import com.springbootclass.bbs.repository.BoardRepository;
 
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -17,6 +20,10 @@ public class BoardService {
 
 	@Autowired
 	private BoardRepository boardRepository;
+	
+	public void deleteBoard(int no) {
+		boardRepository.deleteById(no);
+	}
 	
 	@Transactional
 	public BoardDTO updateBoard(BoardDTO dto) {

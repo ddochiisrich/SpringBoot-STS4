@@ -1,5 +1,19 @@
 $(function() {
 	
+	$("#detailDelete").on("click", function(){
+		let pass = $("#pass").val();
+		
+		if(pass.length <= 0){
+			alert("비밀번호 입력")
+			return false;
+		}
+		
+		$("#rPass").val(pass);
+		$("#checkForm").attr("action", "delete");
+		$("#checkForm").attr("method", "post");
+		$("#checkForm").submit();
+	})
+	
 	$("#updateForm").on("submit", function(){
 		if($("#writer").val().length <= 0){
 			alert("작성자가 입력되지않음");
