@@ -62,5 +62,9 @@ public class Board {
 		this.content = dto.getContent();
 	}
 	
+	public void incrementReadCount() {
+		this.readCount = this.readCount + 1;
+	}
+	
 	
 }
